@@ -163,7 +163,7 @@ class _AudioInfoScreenState extends State<AudioInfoScreen> {
     setState(() => _isPickingFile = true);
 
     try {
-      final FilePickerResult? result = await FilePicker.platform.pickFiles(
+      final FilePickerResult? result = await FilePicker.pickFiles(
         type: FileType.custom,
         allowedExtensions: [
           'mp3', 'm4a', 'aac', 'wav', 'flac', 'ogg', 'opus', 'aiff', 'wma',
