@@ -15,18 +15,11 @@ repositories {
 
 android {
     namespace = "com.kumpali.audio_info"
-
     compileSdk = 37
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_21
         targetCompatibility = JavaVersion.VERSION_21
-    }
-
-    kotlin {
-        compilerOptions {
-            jvmTarget.set(JvmTarget.JVM_21)
-        }
     }
 
     sourceSets {
@@ -47,13 +40,19 @@ android {
             useJUnitPlatform()
 
             testLogging {
-               events "passed", "skipped", "failed", "standardOut", "standardError"
+               events("passed", "skipped", "failed", "standardOut", "standardError")
                outputs.upToDateWhen {false}
                showStandardStreams = true
             }
         }
     }
 }
+
+kotlin {
+        compilerOptions {
+            jvmTarget.set(JvmTarget.JVM_21)
+        }
+    }
 
 dependencies {
         testImplementation("org.jetbrains.kotlin:kotlin-test")
