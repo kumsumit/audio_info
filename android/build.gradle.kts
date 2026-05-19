@@ -1,4 +1,6 @@
 import com.android.build.api.dsl.LibraryExtension
+import org.gradle.api.JavaVersion
+import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.TestLogEvent
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
@@ -18,6 +20,7 @@ repositories {
 extensions.configure<LibraryExtension>("android") {
 
     namespace = "com.kumpali.audio_info"
+
     compileSdk = 37
 
     defaultConfig {
@@ -30,44 +33,54 @@ extensions.configure<LibraryExtension>("android") {
     }
 
     sourceSets {
+
         getByName("main") {
-            java.setSrcDirs(listOf("src/main/kotlin"))
+            java.srcDirs("src/main/kotlin")
         }
 
         getByName("test") {
-            java.setSrcDirs(listOf("src/test/kotlin"))
+            java.srcDirs("src/test/kotlin")
         }
     }
 
     testOptions {
+
         unitTests.all {
 
-            useJUnitPlatform()
+            (this as Test).apply {
 
-            testLogging {
-                events = setOf(
-                    TestLogEvent.PASSED,
-                    TestLogEvent.SKIPPED,
-                    TestLogEvent.FAILED,
-                    TestLogEvent.STANDARD_OUT,
-                    TestLogEvent.STANDARD_ERROR
-                )
+                useJUnitPlatform()
 
-                showStandardStreams = true
+                testLogging {
+
+                    events(
+                        TestLogEvent.PASSED,
+                        TestLogEvent.SKIPPED,
+                        TestLogEvent.FAILED,
+                        TestLogEvent.STANDARD_OUT,
+                        TestLogEvent.STANDARD_ERROR
+                    )
+
+                    showStandardStreams = true
+                }
+
+                outputs.upToDateWhen { false }
             }
-
-            outputs.upToDateWhen { false }
         }
     }
 }
 
 kotlin {
+
     compilerOptions {
+
         jvmTarget.set(JvmTarget.JVM_21)
     }
 }
 
 dependencies {
+
     testImplementation(kotlin("test"))
+
     testImplementation("org.mockito:mockito-core:5.23.0")
 }
