@@ -1,11 +1,10 @@
 import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.gradle.api.tasks.testing.Test
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.library")
-    id("org.jetbrains.kotlin.android")
+    kotlin("android")
 }
 
 group = "com.kumpali.audio_info"
@@ -43,9 +42,9 @@ extensions.configure<LibraryExtension>("android") {
     testOptions {
         unitTests.all {
 
-            it.useJUnitPlatform()
+            useJUnitPlatform()
 
-            it.testLogging {
+            testLogging {
                 events = setOf(
                     TestLogEvent.PASSED,
                     TestLogEvent.SKIPPED,
@@ -57,7 +56,7 @@ extensions.configure<LibraryExtension>("android") {
                 showStandardStreams = true
             }
 
-            it.outputs.upToDateWhen { false }
+            outputs.upToDateWhen { false }
         }
     }
 }
@@ -69,6 +68,6 @@ kotlin {
 }
 
 dependencies {
-    testImplementation("org.jetbrains.kotlin:kotlin-test")
+    testImplementation(kotlin("test"))
     testImplementation("org.mockito:mockito-core:5.23.0")
 }

@@ -1,1 +1,1 @@
-rootProject.name = 'audio_info'
+rootProject.name = "audio_info"
