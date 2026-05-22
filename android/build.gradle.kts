@@ -2,11 +2,9 @@ import com.android.build.api.dsl.LibraryExtension
 import org.gradle.api.JavaVersion
 import org.gradle.api.tasks.testing.Test
 import org.gradle.api.tasks.testing.logging.TestLogEvent
-import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 
 plugins {
     id("com.android.library")
-    kotlin("android")
 }
 
 group = "com.kumpali.audio_info"
@@ -70,13 +68,6 @@ extensions.configure<LibraryExtension>("android") {
     }
 }
 
-kotlin {
-
-    compilerOptions {
-
-        jvmTarget.set(JvmTarget.JVM_21)
-    }
-}
 
 dependencies {
 
